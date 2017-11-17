@@ -1,0 +1,17 @@
+{
+  "name": "gettime",
+  "version": "1.0.0",
+  "description": "getTimeFromToggle",
+  "main": "getTime.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua McKinney",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.6.0",
+    "d3-dsv": "^1.0.7",
+    "moment": "^2.19.2",
+    "toggl-api": "^1.0.1"
+  }
+}
