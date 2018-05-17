@@ -5,7 +5,7 @@ var TogglClient = require('toggl-api'),
     moment = require('moment'),
     fs = require('fs'),
     toggl = new TogglClient({
-        apiToken: process.argv[2]
+        apiToken: process.argv[3]
     }),
     startDay = moment('5-21-2017', 'MM-DD-YYYY'), //make sure it's a sunday
     today = moment(),
@@ -19,17 +19,22 @@ while (startDay.isBefore(today)) {
     startDay.add(7, 'days');
 }
 
-//console.log(weekStartDays);
+// console.log(weekStartDays);
 
 
 function getReport(date, cb) {
     var settings = {
+        user_agent: process.argv[2],
         since: date,
         workspace_id: 601479,
     };
 
 
     toggl.weeklyReport(settings, function (err, report) {
+        if(err){
+            console.log(err);
+            cb(err, null);
+        }
         var reportOut = {
             startDate: date,
             projects: report.data.map(function(project){
@@ -46,7 +51,7 @@ function getReport(date, cb) {
 
 
 
-asyncLib.map(weekStartDays, getReport, function (err, report) {
+asyncLib.mapSeries(weekStartDays, getReport, function (err, report) {
     if(err){
         console.log(err);
     }

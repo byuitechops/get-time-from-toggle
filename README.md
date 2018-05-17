@@ -3,7 +3,7 @@ this runs a series of weekly report from toggle
 
 ## to run it
 
-```node getTime apiKey```
+```node getTime email apiKey```
 
 ## then to get a csv
 
